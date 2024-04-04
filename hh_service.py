@@ -1,15 +1,16 @@
 import requests
 import csv
 
-
-def get_vacancies():
-    url = 'https://api.hh.ru/vacancies'
-    params = {
-        'text': 'python разработчик',
+params = {
+        'text': 'Fortnite balls',
         'area': '1',
         'period': '30',
         'per_page': '100'
     }
+
+def get_vacancies(tag: str):
+    url = 'https://api.hh.ru/vacancies'
+    params['text'] = tag 
     response = requests.get(url, params=params)
     if response.status_code == 200:
         return response.json()
@@ -17,37 +18,37 @@ def get_vacancies():
         print("Ошибка при выполнении запроса:", response.status_code)
         return None
 
-
 def extract_salary(vacancy):
     salary_data = vacancy.get('salary')
     if salary_data:
-        if salary_data.get('from') and salary_data.get('to'):
-            return f"{salary_data['from']} - {salary_data['to']} {salary_data['currency']}"
-        elif salary_data.get('from'):
-            return f"от {salary_data['from']} {salary_data['currency']}"
-        elif salary_data.get('to'):
-            return f"до {salary_data['to']} {salary_data['currency']}"
-    return 'Не указано'
-
+        lower_bound = salary_data.get('from')
+        upper_bound = salary_data.get('to')
+        currency = salary_data.get('currency')
+        return lower_bound, upper_bound, currency
+    return None, None, None
 
 def save_to_csv(vacancies, filename):
-    with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=['Название', 'Компания', 'Зарплата', 'Ссылка'])
-        writer.writeheader()
+    with open(filename, 'a', newline='', encoding='utf-8') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=['Тэг', 'Название', 'Нижняя граница зарплаты', 'Верхняя граница зарплаты', 'Валюта'])
         for vacancy in vacancies:
+            lower_bound, upper_bound, currency = extract_salary(vacancy)
             writer.writerow({
                 'Название': vacancy['name'],
-                'Компания': vacancy['employer']['name'],
-                'Зарплата': extract_salary(vacancy),
-                'Ссылка': vacancy['alternate_url']
+                'Нижняя граница зарплаты': lower_bound,
+                'Верхняя граница зарплаты': upper_bound,
+                'Валюта': currency,
+                'Тэг': params['text'].replace('!', '')
             })
 
+with open('tags.txt', 'r') as tags_file:
+    for tag in [line.rstrip('\n') for line in tags_file]:
+        print(tag)
+        vacancies_data = get_vacancies(tag)
 
-if __name__ == '__main__':
-    vacancies_data = get_vacancies()
-    
-    if vacancies_data:
-        save_to_csv(vacancies_data['items'], 'vacancies.csv')
-        print("Данные успешно сохранены в файл vacancies.csv")
-    else:
-        print("Не удалось получить данные о вакансиях.")
+        if vacancies_data:
+            save_to_csv(vacancies_data['items'], 'vacancies2.csv')
+            print("Данные успешно сохранены в файл vacancies2.csv")
+        else:
+            print("Не удалось получить данные о вакансиях.")
+
+
