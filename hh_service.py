@@ -10,7 +10,7 @@ params = {
 
 def get_vacancies(tag: str):
     url = 'https://api.hh.ru/vacancies'
-    params['text'] = tag 
+    params['text'] = f"NAME:{tag}"
     response = requests.get(url, params=params)
     if response.status_code == 200:
         return response.json()
@@ -38,10 +38,14 @@ def save_to_csv(vacancies, filename):
                 'Нижняя граница зарплаты': lower_bound,
                 'Верхняя граница зарплаты': upper_bound,
                 'Валюта': currency,
-                'Тэг': params['text'].replace('!', '')
+                'Тэг': params['text'][5:]
             })
 
 with open('tags.txt', 'r') as tags_file:
+
+    with open('vacancies2.csv', 'w') as _:
+        pass
+
     for tag in [line.rstrip('\n') for line in tags_file]:
         print(tag)
         vacancies_data = get_vacancies(tag)

@@ -1,7 +1,7 @@
-!Frontend !разработчик
-!Python !разработчик
-!C++ !разработчик
-!Unity !разработчик
-!Java !разработчик
-!Go !разработчик
-!Rust !разработчик
+JavaSctipt
+Python
+C++
+C#
+Java
+Go
+Rust 
