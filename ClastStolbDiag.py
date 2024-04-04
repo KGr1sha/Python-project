@@ -6,7 +6,7 @@ from matplotlib.ticker import FuncFormatter
 # Установка размера шрифта для всех элементов графика
 plt.rc('font', size=7) # Установка размера шрифта в 10
 # Чтение данных из файла CSV
-df = pd.read_csv('vacancies.csv', delimiter=',', encoding='utf-8')
+df = pd.read_csv('vacancies2.csv', delimiter=',', encoding='utf-8')
 
 # Замена NaN в 'Верхняя граница зарплаты' на значения из 'Нижняя граница зарплаты'
 df['Верхняя граница зарплаты'] = df['Верхняя граница зарплаты'].fillna(df['Нижняя граница зарплаты'])

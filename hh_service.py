@@ -30,6 +30,7 @@ def extract_salary(vacancy):
 def save_to_csv(vacancies, filename):
     with open(filename, 'a', newline='', encoding='utf-8') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=['Тэг', 'Название', 'Нижняя граница зарплаты', 'Верхняя граница зарплаты', 'Валюта'])
+        writer.writeheader()
         for vacancy in vacancies:
             lower_bound, upper_bound, currency = extract_salary(vacancy)
             writer.writerow({
