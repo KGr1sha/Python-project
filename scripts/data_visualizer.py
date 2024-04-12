@@ -69,11 +69,9 @@ def show_scatter_fare_age():
 
 
 if __name__ == '__main__':
-    """
     show_survival_by_gender()
     show_age_distribution_by_survival()
     show_boxplot_fare_by_survival()
     show_boxplot_age_by_survival()
-    """
     show_scatter_fare_age()
 
