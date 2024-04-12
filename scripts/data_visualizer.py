@@ -56,16 +56,35 @@ def show_boxplot_age_by_survival():
     plt.show()
 
 
-def show_scatter_fare_age():
+def show_scatter_fare_age_survived():
     plt.figure(figsize=(16, 8))
-    colors = pd.factorize(data['survived'])[0]
-    plt.scatter(data['fare'], data['age'], c=colors, cmap='viridis', alpha=0.6)
+    colors = {1: 'green', 0: 'red'}
+    for status in 0, 1:
+        subset = data[data['survived'] == status]
+        plt.scatter(subset['age'], subset['fare'], color=colors[status], label=status, alpha=0.6)
     plt.xlabel('Fare')
     plt.ylabel('Age')
     plt.title('Categorized Scatterplot: Fare vs Age by Survived')
-    plt.colorbar(label='Survived')
+    plt.legend()
+    plt.grid(True)
     plt.savefig(os.path.join(SAVE_DIR, 'scatterplot_fare_age_survived'))
     plt.show()
+
+
+def show_scatter_fare_age_pclass():
+    plt.figure(figsize=(12, 8))
+    colors = {1: 'blue', 2: 'green', 3: 'red'}
+    categories = data['pclass'].unique()
+    for category in categories:
+        subset = data[data['pclass'] == category]
+        plt.scatter(subset['age'], subset['fare'], color=colors[category], label=category, alpha=0.6)
+    plt.title('Scatter plot of Age vs Fare categorized by Pclass')
+    plt.xlabel('Age')
+    plt.ylabel('Fare')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+   
 
 
 if __name__ == '__main__':
@@ -73,5 +92,6 @@ if __name__ == '__main__':
     show_age_distribution_by_survival()
     show_boxplot_fare_by_survival()
     show_boxplot_age_by_survival()
-    show_scatter_fare_age()
+    show_scatter_fare_age_survived()
+    show_scatter_fare_age_pclass()
 
