@@ -1,7 +1,0 @@
-JavaSctipt
-Python
-C++
-C#
-Java
-Go
-Rust 
