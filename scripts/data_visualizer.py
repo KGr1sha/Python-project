@@ -83,6 +83,7 @@ def show_scatter_fare_age_pclass():
     plt.ylabel('Fare')
     plt.legend()
     plt.grid(True)
+    plt.savefig(os.path.join(SAVE_DIR, 'scatterplot_fare_age_pclass'))
     plt.show()
    
 
