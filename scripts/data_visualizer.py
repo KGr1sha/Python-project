@@ -28,7 +28,7 @@ def show_age_distribution_by_survival():
     plt.hist([data[data['survived'] == 0]['age'], data[data['survived'] == 1]['age']], bins=10, alpha=0.5, label=['Not Survived', 'Survived'], color=['red', 'green'])
     plt.xlabel('Age')
     plt.ylabel('Frequency')
-    plt.title('Histogram of Scores. Age Distribution by Survival')
+    plt.title('Histogram of Scores. Age distribution by Survival')
     plt.legend()
     plt.savefig(os.path.join(SAVE_DIR, 'categorized_histogram_quant_qual.png'))
     plt.show()
@@ -38,7 +38,7 @@ def show_boxplot_fare_by_survival():
     data.boxplot(column='fare', by='survived', figsize=(16,8))
     plt.xlabel('Survived', fontsize=12)
     plt.ylabel('Fare', fontsize=12)
-    plt.title('Boxplot of Fare Distribution by Survival', fontsize=12)
+    plt.title('Boxplot of Fare distribution by Survival', fontsize=12)
     plt.xticks(ticks=[1, 2], labels=['Not Survived', 'Survived'])
     plt.tick_params(axis='both', which='major', labelsize=10)
     plt.savefig(os.path.join(SAVE_DIR, 'categorized_boxplot_fare.png'))
@@ -46,10 +46,10 @@ def show_boxplot_fare_by_survival():
 
 
 def show_boxplot_age_by_survival():
-    data.boxplot(column='fare', by='survived', figsize=(16,8))
+    data.boxplot(column='age', by='survived', figsize=(16,8))
     plt.xlabel('Survived', fontsize=12)
-    plt.ylabel('Fare', fontsize=12)
-    plt.title('Boxplot of Fare Distribution by Survival', fontsize=12)
+    plt.ylabel('Age', fontsize=12)
+    plt.title('Boxplot of Age distribution by Survival', fontsize=12)
     plt.xticks(ticks=[1, 2], labels=['Not Survived', 'Survived'])
     plt.tick_params(axis='both', which='major', labelsize=10)
     plt.savefig(os.path.join(SAVE_DIR, 'categorized_boxplot_age.png'))
