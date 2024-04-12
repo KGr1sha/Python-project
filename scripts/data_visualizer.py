@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 import os
 
@@ -13,7 +12,6 @@ DATASET_PATH = os.path.join('..', 'data', 'Titanic Dataset.csv')
 
 data = pd.read_csv(DATASET_PATH)
 
-
 def show_survival_by_gender():
     plt.figure(figsize=(12, 8))
     data.groupby('sex')['survived'].count().plot(kind='bar', color='red')
@@ -22,7 +20,7 @@ def show_survival_by_gender():
     plt.title('Survival by Gender')
     plt.xticks(rotation=45)
     plt.tight_layout()
-    plt.savefig(SAVE_DIR + '/Clustered_bar_plot.png')
+    plt.savefig(os.path.join(SAVE_DIR, 'clustered_bar_plot.png'))
     plt.show()
 
 
@@ -34,7 +32,7 @@ def show_age_distribution_by_survival():
     plt.title('Histogram of Scores. Age Distribution by Survival')
     plt.legend()
     plt.tight_layout()
-    plt.savefig(SAVE_DIR + '/categorized_histogram_quant_qual.png')
+    plt.savefig(os.path.join(SAVE_DIR, 'categorized_histogram_quant_qual.png'))
     plt.show()
 
 
@@ -46,7 +44,7 @@ def show_boxplot_fare_by_survival():
     plt.xticks(ticks=[1, 2], labels=['Not Survived', 'Survived'])
     plt.tick_params(axis='both', which='major', labelsize=10)
     plt.tight_layout()
-    plt.savefig(SAVE_DIR + '/categorized_boxplot_fare.png')
+    plt.savefig(os.path.join(SAVE_DIR, 'categorized_boxplot_fare.png'))
     plt.show()
 
 
@@ -58,7 +56,7 @@ def show_boxplot_age_by_survival():
     plt.xticks(ticks=[1, 2], labels=['Not Survived', 'Survived'])
     plt.tick_params(axis='both', which='major', labelsize=10)
     plt.tight_layout()
-    plt.savefig(SAVE_DIR + '/categorized_boxplot_age.png')
+    plt.savefig(os.path.join(SAVE_DIR, 'categorized_boxplot_age.png'))
     plt.show()
 
 
