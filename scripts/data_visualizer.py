@@ -4,7 +4,11 @@ import matplotlib.pyplot as plt
 import os
 
 
-SAVE_DIR = os.path.join('..', 'output') 
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
+
+SAVE_DIR = os.path.join('..', 'graphs') 
 DATASET_PATH = os.path.join('..', 'data', 'Titanic Dataset.csv') 
 
 data = pd.read_csv(DATASET_PATH)
