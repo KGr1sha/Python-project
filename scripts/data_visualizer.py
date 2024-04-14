@@ -2,7 +2,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 
-
 abspath = os.path.abspath(__file__)
 dname = os.path.dirname(abspath)
 os.chdir(dname)
@@ -62,8 +61,8 @@ def show_scatter_fare_age_survived():
     for status in 0, 1:
         subset = data[data['survived'] == status]
         plt.scatter(subset['age'], subset['fare'], color=colors[status], label=status, alpha=0.6)
-    plt.xlabel('Fare')
-    plt.ylabel('Age')
+    plt.xlabel('Age')
+    plt.ylabel('Fare')
     plt.title('Categorized Scatterplot: Fare vs Age by Survived')
     plt.legend()
     plt.grid(True)
@@ -72,13 +71,14 @@ def show_scatter_fare_age_survived():
 
 
 def show_scatter_fare_age_pclass():
+    alive = data[data['survived'] == 1]
     plt.figure(figsize=(12, 8))
     colors = {1: 'blue', 2: 'green', 3: 'red'}
     categories = data['pclass'].unique()
     for category in categories:
-        subset = data[data['pclass'] == category]
+        subset = alive[alive['pclass'] == category]
         plt.scatter(subset['age'], subset['fare'], color=colors[category], label=category, alpha=0.6)
-    plt.title('Scatter plot of Age vs Fare categorized by Pclass')
+    plt.title('Scatter plot of Age vs Fare by Pclass (among survived)')
     plt.xlabel('Age')
     plt.ylabel('Fare')
     plt.legend()
