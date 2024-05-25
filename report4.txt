@@ -1,0 +1,4 @@
+survived  Не выжили  Выжили
+sex                        
+female          127     339
+male            682     161
