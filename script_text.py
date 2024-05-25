@@ -161,28 +161,68 @@ def create_survival_pivot_table(file_path: str) -> pd.DataFrame:
     return pivot_table
 
 
-def save_to_file(data, filename):
+def save_to_file_txt(data, filename):
+    """
+    Функция для сохранения данных в текстовый файл.
+
+    Parameters
+    ----------
+    data : Any
+        Данные для сохранения в файл.
+    filename : str
+        Имя файла, в который будут сохранены данные.
+
+    Returns
+    -------
+    None
+    """
     with open(filename, 'w') as f:
         f.write(str(data))
 
+
+def save_to_file_csv(data, filename):
+    """
+    Функция для сохранения данных в CSV-файл.
+
+    Parameters
+    ----------
+    data : pd.DataFrame
+        DataFrame, содержащий данные для сохранения.
+    filename : str
+        Имя файла, в который будут сохранены данные.
+
+    Returns
+    -------
+    None
+    """
+    data.to_csv(filename, index=False)
+
 print('Текстовый отчет №1')
-print('\nФункция генерации отчетов о распределении возраста пассажиров в диапазоне от 20 до 30 лет')
-report1 = age_distribution(df, 20, 30)
-save_to_file(report1, 'rep/report1.txt')
+min_age = int(input("Введите минимальный возраст: "))
+max_age = int(input("Введите максимальный возраст: "))
+print('\nФункция генерации отчетов о распределении возраста пассажиров')
+report1 = age_distribution(df, min_age, max_age)
+save_to_file_txt(report1, 'rep/report1.txt')
+save_to_file_csv(report1, 'rep/report1.csv')
 print(report1)
 
 print('\nТекстовый отчет №2')
-print('\nФункция генерации отчетов о выживаемости пассажиров в зависимости от пола (female)')
-report2 = gender_survival(df, 'female')
-save_to_file(report2, 'rep/report2.txt')
+gender = input("Введите пол (male/female): ")
+print('\nФункция генерации отчетов о выживаемости пассажиров в зависимости от пола')
+report2 = gender_survival(df, gender)
+save_to_file_txt(report2, 'rep/report2.txt')
+save_to_file_csv(report2, 'rep/report2.csv')
 print(report2)
 
 print('\nТекстовый отчет №3')
 print('\nБилеты выживших пассажиров')
 report3 = generate_survival_report('data/people.csv')
-save_to_file(report3, 'rep/report3.txt')
+save_to_file_txt(report3, 'rep/report3.txt')
+save_to_file_csv(report3, 'rep/report3.csv')
 print(report3)
 
 print('\nТекстовый отчет №4')
 pivot_table = create_survival_pivot_table('data/people.csv')
-save_to_file(pivot_table, 'rep/report4.txt')
+save_to_file_txt(pivot_table, 'rep/report4.txt')
+save_to_file_csv(pivot_table, 'rep/report4.csv')
+
