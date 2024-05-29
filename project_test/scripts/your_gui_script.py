@@ -63,7 +63,12 @@ class TitanicApp(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Информационно-Аналитическое Приложение")
-        self.geometry("800x600")
+
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+        offset_x = int(screen_width/4)
+        offset_y = int(screen_height/4)
+        self.geometry(f"{int(screen_width/2)}x{int(screen_height/2)}+{offset_x}+{offset_y}")
 
         # Create Widgets
         self.create_widgets()

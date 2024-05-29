@@ -24,7 +24,7 @@ full_titanic_data_path = os.path.abspath(os.path.join(current_dir, titanic_data_
 full_people_data_path = os.path.abspath(os.path.join(current_dir, people_data_path))
 full_tickets_data_path = os.path.abspath(os.path.join(current_dir, tickets_data_path))
 
-file_path = '../data/Titanic_Dataset.csv'
+
 df = pd.read_csv(full_titanic_data_path)
 df = df.drop(df.columns[0], axis=1)
 
@@ -194,8 +194,8 @@ print(gender_survival(df, 'female'))
 print()
 
 print('Текстовый отчет №3')
-print(generate_survival_report('data/people.csv'))
+print(generate_survival_report(os.path.join("..", "data", "Titanic_Dataset.csv")))
 print('Билеты выживших пассажиров')
 
 print('Текстовый отчет №4')
-create_survival_pivot_table('data/people.csv')
+create_survival_pivot_table(os.path.join("..", "data", "Titanic_Dataset.csv"))
