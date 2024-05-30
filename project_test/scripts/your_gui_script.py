@@ -121,6 +121,7 @@ class TitanicApp(tk.Tk):
         except Exception as e:
             messagebox.showerror("Error", f"An error occurred: {e}")
 
+
     def show_survival_by_age(self):
         try:
             age_min = int(self.age_min_entry.get())

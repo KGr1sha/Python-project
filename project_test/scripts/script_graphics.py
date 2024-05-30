@@ -75,8 +75,8 @@ def show_scatter_fare_age_survived():
     for status in 0, 1:
         subset = data[data['survived'] == status]
         plt.scatter(subset['age'], subset['fare'], color=colors[status], label=status, alpha=0.6)
-    plt.xlabel('Fare')
-    plt.ylabel('Age')
+    plt.xlabel('Age')
+    plt.ylabel('Fare')
     plt.title('Categorized Scatterplot: Fare vs Age by Survived')
     plt.legend()
     plt.grid(True)

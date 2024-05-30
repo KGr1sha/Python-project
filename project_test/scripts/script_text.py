@@ -194,8 +194,8 @@ print(gender_survival(df, 'female'))
 print()
 
 print('Текстовый отчет №3')
-print(generate_survival_report(os.path.join("..", "data", "Titanic_Dataset.csv")))
+print(generate_survival_report(full_titanic_data_path))
 print('Билеты выживших пассажиров')
 
 print('Текстовый отчет №4')
-create_survival_pivot_table(os.path.join("..", "data", "Titanic_Dataset.csv"))
+create_survival_pivot_table(full_titanic_data_path)
